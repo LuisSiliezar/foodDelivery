@@ -32,11 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Image(
-                  image: AssetImage(restaurant.imageUrl),
-                  height: 150.0,
-                  width: 150.0,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: restaurant.imageUrl,
+                  child: Image(
+                    image: AssetImage(restaurant.imageUrl),
+                    height: 150.0,
+                    width: 150.0,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Expanded(
@@ -147,9 +150,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: const Text(
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
                   'Nearby Restaurants',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
