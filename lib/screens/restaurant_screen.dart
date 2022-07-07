@@ -125,6 +125,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
               ),
             ),
           ),
+          const SizedBox(height: 10.0),
         ],
       ),
     );
