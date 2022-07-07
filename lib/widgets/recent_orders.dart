@@ -26,7 +26,7 @@ class RecentOrders extends StatelessWidget {
                   child: Image(
                     height: 100.0,
                     width: 100.0,
-                    image: NetworkImage(order.food.imageUrl),
+                    image: AssetImage(order.food.imageUrl),
                     fit: BoxFit.cover,
                   ),
                 ),
