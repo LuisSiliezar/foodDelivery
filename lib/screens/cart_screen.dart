@@ -130,11 +130,82 @@ class _CartScreenState extends State<CartScreen> {
         physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, index) =>
             const Divider(height: 1.0, color: Colors.grey),
-        itemCount: currentUser.cart.length,
+        itemCount: currentUser.cart.length + 1,
         itemBuilder: (context, index) {
-          Order order = currentUser.cart[index];
-          return _buildCartItem(order);
+          if (index < currentUser.cart.length) {
+            Order order = currentUser.cart[index];
+            return _buildCartItem(order);
+          }
+          double totalPrice = 0;
+          currentUser.cart.forEach(
+              (Order order) => totalPrice += order.quantity * order.food.price);
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      "Estimate Delivery Time",
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      "25 min",
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 10.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Total Cost",
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      '\$' + totalPrice.toStringAsFixed(2),
+                      style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.green),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 125),
+              ],
+            ),
+          );
         },
+      ),
+      bottomSheet: Container(
+        height: 100.0,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          color: Colors.deepOrangeAccent,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, -1),
+              blurRadius: 6.0,
+            )
+          ],
+        ),
+        child: Center(
+          child: TextButton(
+              onPressed: () {},
+              child: const Text(
+                "CHECKOUT",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.0),
+              )),
+        ),
       ),
     );
   }
